@@ -1,0 +1,73 @@
+{
+  "name": "@jan-tee/nestjs-monitor",
+  "version": "1.0.0",
+  "description": "A simple extensible monitoring module for NestJS",
+  "author": {
+    "name": "Jan Tietze",
+    "email": "jan@tietze.io",
+    "url": "https://github.com/jan-tee"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jan-tee/nestjs-monitor.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "start:docker": "node dist/main",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "test": "jest",
+    "test:dev": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "dependencies": {
+    "@nestjs/common": "^6.7.2",
+    "@nestjs/core": "^6.7.2",
+    "@nestjs/platform-express": "^6.7.2",
+    "@types/jest": "^26.0.7",
+    "@types/long": "^4.0.1",
+    "long": "^4.0.0"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^6.9.0",
+    "@nestjs/schematics": "^6.7.0",
+    "@nestjs/testing": "^6.11.11",
+    "@types/bluebird": "^3.5.32",
+    "@types/express": "^4.17.7",
+    "@types/node": "^12.12.53",
+    "@types/supertest": "^2.0.10",
+    "@types/validator": "^12.0.1",
+    "axios-logger": "^2.3.1",
+    "copyfiles": "^2.3.0",
+    "jest": "^26.1.0",
+    "prettier": "^1.18.2",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "supertest": "^4.0.2",
+    "ts-jest": "^26.1.4",
+    "ts-loader": "^6.2.2",
+    "ts-node": "^8.10.2",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "^5.20.0",
+    "typescript": "^3.9.7"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testRegex": [
+      "/src/.*\\.test\\.ts"
+    ],
+    "verbose": true
+  }
+}
