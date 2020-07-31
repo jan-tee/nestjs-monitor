@@ -1,6 +1,6 @@
 {
   "name": "@jan-tee/nestjs-monitor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple extensible monitoring module for NestJS",
   "author": {
     "name": "Jan Tietze",
@@ -69,5 +69,10 @@
       "/src/.*\\.test\\.ts"
     ],
     "verbose": true
-  }
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "main": "dist/index.js"
 }
