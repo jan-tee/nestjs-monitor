@@ -1,3 +1,5 @@
+![Build npm package](https://github.com/jan-tee/nestjs-monitor/workflows/Build%20npm%20package/badge.svg)
+
 # @jan-tee/nestjs-monitor
 
 This is a simple monitoring package for NestJS projects.
