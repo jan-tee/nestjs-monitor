@@ -3,6 +3,7 @@ import os from 'os';
 
 export type MonitorFunction = () => string;
 export type MetricFunction = () => any;
+export type ServiceStatus = 'initializing' | 'ready' | 'error' | 'recovering' | 'shutting-down' | 'shutdown';
 
 @Injectable()
 export class MonitoringService {
@@ -13,6 +14,7 @@ export class MonitoringService {
   };
   private monitors: MonitorFunction[] = [];
   private metricers: { category: string; fn: MetricFunction }[] = [];
+  private statuses: { [service: string]: { status: ServiceStatus; timestamp: Date } } = {};
 
   private readonly intervalLogger: NodeJS.Timeout;
   constructor() {
@@ -55,6 +57,13 @@ export class MonitoringService {
     };
   }
 
+  public setStatus(service: string, status: ServiceStatus) {
+    this.statuses[service] = {
+      status: status,
+      timestamp: new Date(),
+    };
+  }
+
   /**
    * Registers a log reporter
    *
@@ -76,16 +85,21 @@ export class MonitoringService {
 
   /**
    * Returns information about the host and the metrics reported by all registered metric reporters.
-   * 
+   *
    * Typically called by the @see MonitoringController
    */
   public getMetrics() {
-    let r = {
-      node: os.hostname(),
-    };
+    let r = {};
     this.metricers.forEach(m => {
       r[m.category] = m.fn();
     });
     return r;
+  }
+
+  /**
+   * Returns status information about registered services
+   */
+  public getServiceStatus() {
+    return this.statuses;
   }
 }

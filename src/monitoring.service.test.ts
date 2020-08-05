@@ -15,4 +15,10 @@ describe('MonitoringController', () => {
       monitorSvc.registerLogger(() => 'static txt');
     });
   });
+
+  describe('register a status', () => {
+    it('should register a status', () => {
+      monitorSvc.setStatus('service', 'initializing');
+    });
+  });
 });
