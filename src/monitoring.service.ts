@@ -21,7 +21,11 @@ export class MonitoringService {
     this.monitors.push(this.resourceLogger.bind(this));
     this.registerMetric('resources', this.resourceMetric.bind(this));
     this.intervalLogger = setInterval(() => {
-      this.logger.log(this.monitors.map(monitor => monitor()).join('; '));
+      try {
+        this.logger.log(this.monitors.map(monitor => monitor()).join('; '));
+      } catch (err) {
+        this.logger.error(err);
+      }
     }, 10 * 1000);
   }
 
