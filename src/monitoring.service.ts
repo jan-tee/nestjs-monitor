@@ -20,13 +20,16 @@ export class MonitoringService {
   constructor() {
     this.monitors.push(this.resourceLogger.bind(this));
     this.registerMetric('resources', this.resourceMetric.bind(this));
-    this.intervalLogger = setInterval(() => {
-      try {
-        this.logger.log(this.monitors.map(monitor => monitor()).join('; '));
-      } catch (err) {
-        this.logger.error(err);
-      }
-    }, 10 * 1000);
+    this.intervalLogger = setInterval(
+      () => {
+        try {
+          this.logger.log(this.monitors.map(monitor => monitor()).join('; '));
+        } catch (err) {
+          this.logger.error(err);
+        }
+      },
+      process.env.MONITORING_INTERVAL ? Number.parseInt(process.env.MONITORING_INTERVAL) : 10 * 1000,
+    );
   }
 
   private resourceLogger() {
