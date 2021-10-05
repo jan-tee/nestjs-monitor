@@ -2,13 +2,8 @@ name: Build npm package
 
 on:
   push:
-    branches:
-      - master
-      - main
-    paths:
-      - package.json
-      - .npmrc
-      - .github/workflows/build-npm.yml
+    tags:
+      - v*
 
 jobs:
   build:
@@ -16,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [16.x]
     env:
       PKGNAME: nestjs-monitor
 
