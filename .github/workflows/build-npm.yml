@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - v*
-      
+
   workflow_dispatch:
 
 jobs:
@@ -14,12 +14,11 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-    env:
-      PKGNAME: nestjs-monitor
 
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -27,16 +26,20 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://npm.pkg.github.com'
           scope: '@jan-tee'
+
       - name: Install dependencies
         run: |
           npm install
         env:
           NODE_AUTH_TOKEN: ${{ github.token }}
+
       - name: Build
         run: |
           npm run build
+
       - name: Publishing to local registry
         run: |
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ github.token }}
+
