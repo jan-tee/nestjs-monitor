@@ -6,9 +6,7 @@ import os from 'os';
 export class MonitoringController {
   private readonly logger = new Logger('MonitoringController');
 
-  constructor(@Inject(MonitoringService) private readonly monitoringService: MonitoringService) {
-    this.logger.setContext('HealthController');
-  }
+  constructor(@Inject(MonitoringService) private readonly monitoringService: MonitoringService) {}
 
   @Get('ping')
   public getPing() {
